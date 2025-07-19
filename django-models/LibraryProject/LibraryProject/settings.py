@@ -135,3 +135,8 @@ INSTALLED_APPS = [
 
 ]
 
+# settings.py
+
+LOGIN_REDIRECT_URL = '/'  # Redirect after successful login
+LOGOUT_REDIRECT_URL = '/login/'  # Redirect after logout
+LOGIN_URL = '/login/'  # Redirect to login when @login_required is used
