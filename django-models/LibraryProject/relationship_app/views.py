@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Library
 
 # Create your views here.
 # Function based view
@@ -25,3 +26,11 @@ from .models import Book
 def list_books(request):
     books = Book.objects.all()
     return render(request, 'relationship_app/list_books.html', {'books': books})
+
+
+    from django.shortcuts import render, get_object_or_404
+from .models import Library
+
+def library_detail(request, pk):
+    library = get_object_or_404(Library, pk=pk)
+    return render(request, "relationship_app/library_detail.html", {"library": library})
