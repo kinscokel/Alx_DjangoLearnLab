@@ -1,8 +1,0 @@
-rom django.contrib.auth.decorators import login_required, user_passes_test
-from django.shortcuts import render
-from django-models.views.utils import has_role
-
-@user_passes_test(lambda u: has_role(u, 'Librarian'))
-@login_required
-def librarian_dashboard(request):
-    return render(request, 'librarian_view.html')
