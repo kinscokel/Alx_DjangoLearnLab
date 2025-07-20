@@ -140,3 +140,17 @@ INSTALLED_APPS = [
 LOGIN_REDIRECT_URL = '/'  # Redirect after successful login
 LOGOUT_REDIRECT_URL = '/login/'  # Redirect after logout
 LOGIN_URL = '/login/'  # Redirect to login when @login_required is used
+
+# Make sure you have this in your templates section
+TEMPLATES = [
+    {
+        ...
+        'DIRS': [],
+        ...
+        'APP_DIRS': True,
+        ...
+    },
+]
+
+# Static files if using CSS
+STATIC_URL = '/static/'
