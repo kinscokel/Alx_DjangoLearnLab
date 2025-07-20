@@ -120,3 +120,27 @@ from django.http import HttpResponse
 def home(request):
     message = "Welcome to the Library Project!"
     return HttpResponse(message)
+
+
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required, user_passes_test
+
+def check_role(role):
+    def check(user):
+        return user.is_authenticated and hasattr(user, 'userprofile') and user.userprofile.role == role
+    return check
+
+@login_required
+@user_passes_test(check_role('Admin'))
+def admin_view(request):
+    return render(request, 'admin_view.html')
+
+@login_required
+@user_passes_test(check_role('Librarian'))
+def librarian_view(request):
+    return render(request, 'librarian_view.html')
+
+@login_required
+@user_passes_test(check_role('Member'))
+def member_view(request):
+    return render(request, 'member_view.html')
