@@ -42,3 +42,15 @@ urlpatterns = [
     path('librarian-view/', views.librarian_view, name='librarian_view'),
     path('member-view/', views.member_view, name='member_view'),
 ]
+
+from django.urls import path
+from relationship_app import views  # import your views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('admin-view/', views.admin_view, name='admin_view'),
+    path('librarian-view/', views.librarian_view, name='librarian_view'),
+    path('member-view/', views.member_view, name='member_view'),
+    path('', views.home, name='home'),  # Add this line
+
+]

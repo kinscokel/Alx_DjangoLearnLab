@@ -108,12 +108,15 @@ def member_view(request):
 def register(request):
     return render(request, 'register.html')  # Adjust template name as needed
 
-    from django.http import HttpResponse
+from django.http import HttpResponse  
 
 def home(request):
-    return HttpResponse("Welcome to the Library Project!")
+    message = "Welcome to the Library Project!"
+    return HttpResponse(message)
 
-    from django.http import HttpResponse
 
-def home_view(request):
-    return HttpResponse("Welcome to the Library Management System!")
+from django.http import HttpResponse  
+
+def home(request):
+    message = "Welcome to the Library Project!"
+    return HttpResponse(message)
