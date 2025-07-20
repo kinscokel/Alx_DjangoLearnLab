@@ -67,3 +67,53 @@ def register_view(request):
     else:
         form = UserCreationForm()
     return render(request, 'relationship_app/register.html', {'form': form})
+
+
+
+   # django-models/views.py
+
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required, user_passes_test
+
+def check_role(user, role_name):
+    return hasattr(user, 'userprofile') and user.userprofile.role == role_name
+
+def admin_check(user):
+    return check_role(user, 'Admin')
+
+def librarian_check(user):
+    return check_role(user, 'Librarian')
+
+def member_check(user):
+    return check_role(user, 'Member')
+
+@login_required
+@user_passes_test(admin_check)
+def admin_view(request):
+    return render(request, 'admin_view.html')
+
+@login_required
+@user_passes_test(librarian_check)
+def librarian_view(request):
+    return render(request, 'librarian_view.html')
+
+@login_required
+@user_passes_test(member_check)
+def member_view(request):
+    return render(request, 'member_view.html') 
+
+
+    from django.shortcuts import render
+
+def register(request):
+    return render(request, 'register.html')  # Adjust template name as needed
+
+    from django.http import HttpResponse
+
+def home(request):
+    return HttpResponse("Welcome to the Library Project!")
+
+    from django.http import HttpResponse
+
+def home_view(request):
+    return HttpResponse("Welcome to the Library Management System!")

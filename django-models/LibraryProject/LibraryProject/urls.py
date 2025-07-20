@@ -20,3 +20,25 @@ from django.urls import path
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+
+
+# project/urls.py
+
+from django.urls import path, include
+from relationship_app import views
+
+urlpatterns = [
+    path('', include('relationship_app.urls')),  # Adjust if your app name differs
+]
+
+
+from django.contrib import admin
+from django.urls import path
+from relationship_app.views import home  # Replace 'your_app' with your actual app name
+
+urlpatterns = [
+    path('admin/', admin.site.urls),  # <--- This handles the empty path
+    path('admin-view/', views.admin_view, name='admin_view'),
+    path('librarian-view/', views.librarian_view, name='librarian_view'),
+    path('member-view/', views.member_view, name='member_view'),
+]

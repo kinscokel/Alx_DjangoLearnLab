@@ -2,6 +2,7 @@ from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path
 from .views import list_books
+from . import views
 
 urlpatterns = [
     path('books/', views.list_books, name='list_books'),  # Function-based view
@@ -10,7 +11,7 @@ urlpatterns = [
 ]
 
 # relationship_app/urls.py
-rom django.urls import path
+from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
@@ -24,4 +25,16 @@ from . import views
 
 urlpatterns = [
     path('register/', views.register, name='register'),
+]
+
+
+# django-models/urls.py
+
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('admin-view/', views.admin_view, name='admin_view'),
+    path('librarian-view/', views.librarian_view, name='librarian_view'),
+    path('member-view/', views.member_view, name='member_view'),
 ]

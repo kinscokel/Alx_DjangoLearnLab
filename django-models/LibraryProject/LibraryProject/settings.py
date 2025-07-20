@@ -144,13 +144,36 @@ LOGIN_URL = '/login/'  # Redirect to login when @login_required is used
 # Make sure you have this in your templates section
 TEMPLATES = [
     {
-        ...
-        'DIRS': [],
-        ...
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',  # ✅ This is required
+        'DIRS': [],  # or something like [BASE_DIR / "templates"]
         'APP_DIRS': True,
-        ...
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
     },
 ]
 
 # Static files if using CSS
 STATIC_URL = '/static/'
+
+
+TEMPLATES =  [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',  # <-- This must be present
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
