@@ -211,4 +211,4 @@ def librarian_view(request):
 @login_required
 @user_passes_test(is_member)
 def member_view(request):
-    return render(request, 'member_view.html
+    return render(request, 'member_view.html')
