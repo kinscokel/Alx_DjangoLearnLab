@@ -182,3 +182,24 @@ TEMPLATES =  [
 
 AUTH_USER_MODEL = 'bookshelf.CustomUser'
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
+DEBUG = False
+ALLOWED_HOSTS = ['yourdomain.com', '127.0.0.1']
+
+SECURE_BROWSER_XSS_FILTER = True
+X_FRAME_OPTIONS = 'DENY'
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
+
+# SECURITY SETTINGS
+DEBUG = False  # Never set True in production
+SECURE_BROWSER_XSS_FILTER = True  # Prevent XSS in some browsers
+X_FRAME_OPTIONS = 'DENY'  # Prevent clickjacking
+SECURE_CONTENT_TYPE_NOSNIFF = True  # Avoid MIME-type sniffing
+CSRF_COOKIE_SECURE = True  # CSRF cookie sent only over HTTPS
+SESSION_COOKIE_SECURE = True  # Session cookie sent only over HTTPS
+
+

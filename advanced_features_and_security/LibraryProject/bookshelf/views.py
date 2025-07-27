@@ -51,3 +51,14 @@ from .models import Book  # Make sure this model exists
 def book_list(request):
     books = Book.objects.all()
     return render(request, 'bookshelf/book_list.html', {'books': books})
+
+
+from .forms import SearchForm
+
+def search_books(request):
+    form = SearchForm(request.GET)
+    books = []
+    if form.is_valid():
+        title = form.cleaned_data['title']
+        books = Book.objects.filter(title__icontains=title)
+    return render(request, 'bookshelf/book_list.html', {'form': form, 'books': books})
