@@ -62,3 +62,21 @@ def search_books(request):
         title = form.cleaned_data['title']
         books = Book.objects.filter(title__icontains=title)
     return render(request, 'bookshelf/book_list.html', {'form': form, 'books': books})
+
+
+from django.shortcuts import render
+from .forms import BookSearchForm
+from .models import Book
+
+def example_form_view(request):
+    form = BookSearchForm(request.GET or None)
+    books = []
+
+    if form.is_valid():
+        title = form.cleaned_data.get('title')
+        books = Book.objects.filter(title__icontains=title)
+
+    return render(request, 'bookshelf/form_example.html', {
+        'form': form,
+        'books': books
+    })
