@@ -5,12 +5,14 @@
     <title>Book List</title>
 </head>
 <body>
-    <h1>Library Books</h1>
+    <h1>Book List</h1>
 
     {% if books %}
         <ul>
             {% for book in books %}
-                <li><strong>{{ book.title }}</strong> by {{ book.author }}</li>
+                <li>
+                    <strong>{{ book.title }}</strong> by {{ book.author }}{% if book.published_date %} ({{ book.published_date }}){% endif %}
+                </li>
             {% endfor %}
         </ul>
     {% else %}
