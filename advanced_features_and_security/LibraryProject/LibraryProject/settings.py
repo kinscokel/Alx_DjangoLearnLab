@@ -130,7 +130,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'relationship_app',
-     'accounts',
+    'accounts',
+    
     
 
 
@@ -179,9 +180,5 @@ TEMPLATES =  [
     },
 ]
 
-from django.conf import settings
-relationship_app = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-
-AUTH_USER_MODEL = 'relationship_app.CustomUser'
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
