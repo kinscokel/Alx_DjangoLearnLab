@@ -194,12 +194,21 @@ CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 
 
-# SECURITY SETTINGS
-DEBUG = False  # Never set True in production
-SECURE_BROWSER_XSS_FILTER = True  # Prevent XSS in some browsers
-X_FRAME_OPTIONS = 'DENY'  # Prevent clickjacking
-SECURE_CONTENT_TYPE_NOSNIFF = True  # Avoid MIME-type sniffing
-CSRF_COOKIE_SECURE = True  # CSRF cookie sent only over HTTPS
-SESSION_COOKIE_SECURE = True  # Session cookie sent only over HTTPS
+# Enforce HTTPS
+SECURE_SSL_REDIRECT = True  # Redirect all HTTP requests to HTTPS
+
+# HTTP Strict Transport Security (HSTS)
+SECURE_HSTS_SECONDS = 31536000  # 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Apply HSTS to all subdomains
+SECURE_HSTS_PRELOAD = True  # Allow domain to be preloaded into browsers
+
+# Secure Cookies
+SESSION_COOKIE_SECURE = True  # Prevent session cookie from being sent over HTTP
+CSRF_COOKIE_SECURE = True     # Prevent CSRF cookie from being sent over HTTP
+
+# Security Headers
+X_FRAME_OPTIONS = 'DENY'  # Prevent clickjacking by denying iframe embedding
+SECURE_CONTENT_TYPE_NOSNIFF = True  # Prevent content-type sniffing
+SECURE_BROWSER_XSS_FILTER = True  # Enable XSS protection in supported browsers
 
 

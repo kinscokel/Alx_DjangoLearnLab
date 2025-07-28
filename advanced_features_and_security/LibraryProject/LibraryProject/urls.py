@@ -110,3 +110,20 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('bookshelf.urls')),
 ]
+
+
+from django.urls import path
+from .views import example_form_view
+
+urlpatterns = [
+    path('example-form/', example_form_view, name='example_form'),
+]
+
+
+from django.urls import path
+from .views import book_list
+
+urlpatterns = [
+    path('books/', book_list, name='book_list'),
+]
+
