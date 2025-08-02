@@ -20,18 +20,21 @@ class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
-    
-# - Permission Classes:
-# - IsAuthenticated ensures only logged-in users with valid tokens access endpoints.
-# - Optionally use IsAdminOrReadOnly for admin-only edits.
 
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.viewsets import ModelViewSet
-from .models import YourModel
-from .serializers import YourModelSerializer
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from .models import Book
+from .serializers import BookSerializer
 
-class YourModelViewSet(ModelViewSet):
-    queryset = YourModel.objects.all()
-    serializer_class = YourModelSerializer
-    permission_classes = [IsAuthenticated]  # Require token authentication
+class BookList(viewsets.ModelViewSet):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    permission_classes = [IsAuthenticated]  # Only authenticated users
+
+# Another view restricted to admin users
+class AdminOnlyViewSet(viewsets.ModelViewSet):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    permission_classes = [IsAdminUser]
+
 
