@@ -18,7 +18,13 @@ class Book(models.Model):
     publication_year = models.IntegerField()     # Year of publication
     author = models.ForeignKey(Author, related_name='books', on_delete=models.CASCADE)
  # related_name='books' allows reverse access to an author's books (e.g., author.books.all())
- 
+
     def _str_(self):
         return self.tittle
+
+from django.contrib import admin
+from .models import Author, Book
+
+admin.site.register(Author)
+admin.site.register(Book)  
  
