@@ -1,0 +1,14 @@
+## API Endpoints for Books
+
+| Method | Endpoint              | Description                | Permission            |
+|--------|-----------------------|----------------------------|------------------------|
+| GET    | /api/books/           | List all books             | Public                |
+| GET    | /api/books/<id>/      | Retrieve a specific book   | Public                |
+| POST   | /api/books/create/    | Create a new book          | Authenticated users   |
+| PUT    | /api/books/<id>/update/ | Update a book            | Authenticated users   |
+| DELETE | /api/books/<id>/delete/ | Delete a book            | Authenticated users   |
+
+## Notes
+- The `BookSerializer` handles validation (e.g., title length).
+- Authenticated users must provide a valid token using headers like:
+  `Authorization: Token <your_token>`
