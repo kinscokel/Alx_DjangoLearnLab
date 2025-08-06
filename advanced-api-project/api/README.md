@@ -12,3 +12,21 @@
 - The `BookSerializer` handles validation (e.g., title length).
 - Authenticated users must provide a valid token using headers like:
   `Authorization: Token <your_token>`
+
+
+  ##  Book API - Query Parameters
+
+###  Filtering
+- `/api/books/?author=George Orwell`
+- `/api/books/?publication_year=2023`
+
+###  Searching
+- `/api/books/?search=1984`
+- `/api/books/?search=Orwell`
+
+###  Ordering
+- `/api/books/?ordering=title`
+- `/api/books/?ordering=-publication_year`
+
+###  Combined Example
+- `/api/books/?author=Orwell&search=1984&ordering=-publication_year`
