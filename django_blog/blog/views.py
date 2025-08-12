@@ -27,3 +27,9 @@ def profile_view(request):
         request.user.save()
         messages.success(request, 'Profile updated.')
     return render(request, 'registration/profile.html')
+
+
+from django.shortcuts import render
+
+def home(request):
+    return render(request, 'home.html')  # Create templates/home.
