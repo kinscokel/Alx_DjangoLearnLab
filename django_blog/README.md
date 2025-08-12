@@ -69,3 +69,44 @@ All templates extend a base layout and include CSRF tokens for secure form submi
 ---
 
 ##  Project Structure
+
+
+In settings.py, ensure:
+
+
+TEMPLATES = [
+    {
+        'DIRS': [BASE_DIR / 'templates'],
+        'APP_DIRS': True,
+    },
+]
+ Folder Structure
+
+project/
+├── templates/
+│   ├── base.html
+│   └── registration/
+│       ├── login.html
+│       └── logout.html
+
+blog/
+└── templates/
+    └── blog/
+        ├── post_list.html
+        ├── post_detail.html
+        └── comments/
+            ├── add_comment.html
+            ├── edit_comment.html
+            └── delete_comment.html
+ Comments Display (in post_detail.html)
+
+{% for comment in post.comments.all %}
+  <p><b>{{ comment.author }}</b>: {{ comment.content }}</p>
+{% endfor %}
+
+{% if user.is_authenticated %}
+  <form method="post">{% csrf_token %}{{ form.as_p }}<button>Post</button></form>
+{% else %}
+  <a href="{% url 'login' %}?next={{ request.path }}">Log in to comment</a>
+{% endif %}
+
