@@ -141,3 +141,44 @@ def delete_comment(request, comment_id):
         return redirect('post_detail', pk=post.id)
     return render(request, 'blog/comments/delete_comment.html', {'comment': comment})
 
+
+from django.urls import reverse_lazy, reverse
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.views.generic import CreateView, UpdateView, DeleteView
+from .models import Comment, Post
+from .forms import CommentForm
+
+class CommentCreateView(LoginRequiredMixin, CreateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'blog/comments/add_comment.html'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.post = Post.objects.get(pk=self.kwargs['post_id'])
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('post-detail', kwargs={'pk': self.kwargs['post_id']})
+
+class CommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'blog/comments/edit_comment.html'
+
+    def test_func(self):
+        return self.request.user == self.get_object().author
+
+    def get_success_url(self):
+        return reverse('post-detail', kwargs={'pk': self.get_object().post.pk})
+
+class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Comment
+    template_name = 'blog/comments/delete_comment.html'
+
+    def test_func(self):
+        return self.request.user == self.get_object().author
+
+    def get_success_url(self):
+        return reverse('post-detail', kwargs={'pk': self.get_object().post.pk})
+
