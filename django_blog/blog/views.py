@@ -207,3 +207,23 @@ def posts_by_tag(request, tag_slug):
     posts = Post.objects.filter(tags__slug=tag_slug)
     return render(request, 'blog/posts_by_tag.html', {'posts': posts, 'tag_name': tag.name})
 
+
+from django.views.generic import ListView
+from .models import Post
+from taggit.models import Tag
+from django.shortcuts import get_object_or_404
+
+class PostByTagListView(ListView):
+    model = Post
+    template_name = 'blog/posts_by_tag.html'  # create this template
+    context_object_name = 'posts'
+
+    def get_queryset(self):
+        self.tag = get_object_or_404(Tag, slug=self.kwargs['tag_slug'])
+        return Post.objects.filter(tags__slug=self.tag.slug)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tag'] = self.tag
+        return context
+
