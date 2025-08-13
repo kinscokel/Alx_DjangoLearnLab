@@ -9,6 +9,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    published_date = models.DateTimeField(null=True, blank=True)  # new field
     tags = TaggableManager()
 
     def __str__(self):
