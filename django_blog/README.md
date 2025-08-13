@@ -110,3 +110,17 @@ blog/
   <a href="{% url 'login' %}?next={{ request.path }}">Log in to comment</a>
 {% endif %}
 
+
+# Tagging and Search Features
+
+## Adding Tags
+- When creating or editing a post, enter tags separated by commas.
+- New tags are automatically created.
+
+## Viewing Tags
+- Tags appear under each post.
+- Click on a tag to see all posts with that tag.
+
+## Searching Posts
+- Use the search bar in the header/footer to search by title, content, or tag name.
+- Results will show posts matching your search query.
