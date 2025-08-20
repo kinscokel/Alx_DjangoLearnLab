@@ -3,8 +3,8 @@ from django.contrib.auth import get_user_model
 from rest_framework.authtoken.models import Token
 
 class RegisterSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True, required=True)
-    password2 = serializers.CharField(write_only=True, required=True)
+    password = serializers.CharField()      # <--- exactly like this
+    password2 = serializers.CharField()     # <--- exactly like this
 
     class Meta:
         model = get_user_model()
