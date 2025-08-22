@@ -46,7 +46,7 @@ class FeedView(APIView):
         return Response(serializer.data)
 
 
-from rest_framework import status, permissions
+from rest_framework import status, permissions, generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
@@ -58,7 +58,7 @@ class LikePostView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, pk):
-        post = get_object_or_404(Post, pk=pk)
+        post = generics.get_object_or_404(Post, pk=pk)
         user = request.user
         # Prevent multiple likes
         if Like.objects.filter(user=user, post=post).exists():
