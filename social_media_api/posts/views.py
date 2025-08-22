@@ -44,3 +44,46 @@ class FeedView(APIView):
 
         serializer = PostSerializer(posts, many=True)
         return Response(serializer.data)
+
+
+from rest_framework import status, permissions
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django.shortcuts import get_object_or_404
+from .models import Post, Like
+from notifications.models import Notification
+from django.contrib.contenttypes.models import ContentType
+
+class LikePostView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, pk):
+        post = get_object_or_404(Post, pk=pk)
+        user = request.user
+        # Prevent multiple likes
+        if Like.objects.filter(user=user, post=post).exists():
+            return Response({'detail': 'You have already liked this post.'}, status=status.HTTP_400_BAD_REQUEST)
+        like = Like.objects.create(user=user, post=post)
+
+        # Create notification
+        if post.author != user:  # Assuming Post has an 'author' ForeignKey
+            Notification.objects.create(
+                recipient=post.author,
+                actor=user,
+                verb='liked your post',
+                target=post,
+            )
+
+        return Response({'detail': 'Post liked.'}, status=status.HTTP_201_CREATED)
+
+class UnlikePostView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, pk):
+        post = get_object_or_404(Post, pk=pk)
+        user = request.user
+        like = Like.objects.filter(user=user, post=post).first()
+        if not like:
+            return Response({'detail': 'You have not liked this post.'}, status=status.HTTP_400_BAD_REQUEST)
+        like.delete()
+        return Response({'detail': 'Post unliked.'}, status=status.HTTP_200_OK)

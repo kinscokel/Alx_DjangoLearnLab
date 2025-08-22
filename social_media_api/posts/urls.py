@@ -19,3 +19,11 @@ urlpatterns = [
     # other url patterns...
 
 ]
+
+from django.urls import path
+from .views import LikePostView, UnlikePostView
+
+urlpatterns = [
+    path('<int:pk>/like/', LikePostView.as_view(), name='post-like'),
+    path('<int:pk>/unlike/', UnlikePostView.as_view(), name='post-unlike'),
+]

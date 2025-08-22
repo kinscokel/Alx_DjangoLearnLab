@@ -17,3 +17,13 @@ class PostSerializer(serializers.ModelSerializer):
         model = Post
         fields = '__all__'
         read_only_fields = ['author', 'created_at', 'updated_at']
+
+
+from rest_framework import serializers
+from .models import Like
+
+class LikeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Like
+        fields = ['id', 'user', 'post', 'timestamp']
+        read_only_fields = ['user', 'timestamp']
