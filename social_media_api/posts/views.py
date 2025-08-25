@@ -63,7 +63,7 @@ class LikePostView(APIView):
         if not created:
             return Response({'detail': 'You have already liked this post.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        # ✅ Send notification (only if not self-like)
+        #  Send notification (only if not self-like)
         if post.author != request.user:
             Notification.objects.create(
                 recipient=post.author,

@@ -53,3 +53,14 @@ class UserListView(generics.GenericAPIView):
         users = self.get_queryset()
         serializer = self.get_serializer(users, many=True)
         return Response(serializer.data)
+
+
+from rest_framework.decorators import api_view
+
+@api_view(['POST'])
+def follow_user(request):
+    return Response({'message': 'Follow user placeholder'}, status=200)
+
+@api_view(['POST'])
+def unfollow_user(request):
+    return Response({'message': 'Unfollow user placeholder'}, status=200)
